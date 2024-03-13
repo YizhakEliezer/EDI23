@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>edi</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script type="text/javascript" src="main.js"></script>
+    <script type="text/javascript" src="chekFileFletSupdes.js"></script>
+    <script type="text/javascript" src="chekFileHashavshevtSupdes.js"></script>
+    <script type="text/javascript" src="Contrast.js"></script>
+    <script type="text/javascript" src="chekFileFletOrder.js"></script>
+    <script type="text/javascript" src="supdesFlat.js"></script>
+    <!--    Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<!--Activation of the test by an event when the user presses enter-->
+<body class="body" onkeydown="checkEnter(event)">
+<label class="toggle-container">
+    <input type="checkbox" onclick="toggleFunction()">
+
+    <span class="toggle-slider"></span>
+</label>
+<p id="screenMode">screen mode</p>
+<!--select of message types-->
+<div class="AllData">
+    <h1>פרטי התעודה</h1>
+    <div class="selectType">
+        <!--pormat file-->
+        <label for="fileStructure"></label>
+        <select name="menuTypeStructure" id="menuTypeStructure">
+            <option value="fileStructure">מבנה המסר</option>
+            <option value="hashavshevt">חשבשבת</option>
+            <option value="fletFile">FLAT FILE</option>
+
+        </select>
+        <!--        type file-->
+        <label for="fileType"></label>
+        <select name="menuTypefile" id="menuTypefile">
+            <option value="fileType">סוג המסר</option>
+            <option value="supdes">משלוח</option>
+            <option value="order">הזמנה</option>
+            <option value="mmdr">כניסה</option>
+            <option value="return">החזרה</option>
+        </select>
+    </div>
+    <!--input from user and icons-->
+    <div class="inputBox">
+        <i class="fa-solid fa-x" style="color: #fa0000;font-size: 15px;position:absolute; left: 20px;top: 10px"
+           id="retailerIconX"></i>
+        <i class="fa-solid fa-check" style="color: #54f000;font-size: 15px;position:absolute; left: 20px;top: 10px"
+           id="retailerIconV"></i>
+        <input type="text" id="retailer" list="jsonValuesRetailer" placeholder="(אופציונלי) בחר את רשת התעודה">
+        <br><br><br>
+        <i class="fa-solid fa-x" style="color: #fa0000;font-size: 15px;position:absolute; left: 20px;top: 65px"
+           id="supplierIconX"></i>
+        <i class="fa-solid fa-check" style="color: #54f000;font-size: 15px;position:absolute; left: 20px;top: 65px"
+           id="supplierIconV"></i>
+        <label for="supplier"></label>
+        <input type="text" id="supplier" placeholder="(אופציונלי) בחר את ספק התעודה" list="jsonValues">
+        <br><br><br>
+        <i class="fa-solid fa-x" style="color: #fa0000;font-size: 15px;position:absolute; left: 20px;top: 120px"
+           id="messageIconX"></i>
+        <i class="fa-solid fa-check" style="color: #54f000;font-size: 15px;position:absolute; left: 20px;top: 120px"
+           id="messageIconV"></i>
+        <input type="text" id="message" placeholder="(אופציונלי) הזן מספר תעודה"
+        ><br><br><br>
+        <i class="fa-solid fa-x" style="color: #fa0000;font-size: 15px;position:absolute; left: 20px;top: 175px"
+           id="supplierSubnetNumberIconX"></i>
+        <i class="fa-solid fa-check" style="color: #54f000;font-size: 15px;position:absolute; left: 20px;top: 175px"
+           id="supplierSubnetNumberIconV"></i>
+        <input type="text" id="supplierSubnetNumber" placeholder="הזן מספר תת ספק(אופציונלי)"
+        ><br><br><br>
+        <i class="fa-solid fa-x" style="color: #fa0000;font-size: 15px;position:absolute; left: 20px;top: 230px"
+           id="branchRetailerIconX"></i>
+        <i class="fa-solid fa-check" style="color: #54f000;font-size: 15px;position:absolute; left: 20px;top: 230px"
+           id="branchRetailerIconV"></i>
+        <input type="text" id="branchRetailer" placeholder="(אופציונלי) edi הזן מספר סניף"
+        ><br><br><br>
+    </div>
+    <br><br>
+</div>
+<br>
+<!--Show the user the choice of Retailer and supplier selected from a json file-->
+<div id="inputBoxData" >
+    <label for="selectedValue"></label>
+    <input type="text" id="selectedValue" readonly style="position: absolute;top: 183px; right: 220px;
+        outline: none; text-align:right;padding: 0px;width: 190px;height: 13px; color: #2d3cc7;font-weight: bold;border:none;">
+    <label for="selectedValueRetailer"></label>
+    <input type="text" id="selectedValueRetailer" readonly style="position: absolute;top: 128px; right: 220px;
+        outline: none;padding: 0px;width: 190px; height: 13px;text-align:right; color: #2d3cc7;font-weight: bold;border: none;">
+
+    <datalist id="jsonValues"></datalist>
+    <datalist id="jsonValuesRetailer"></datalist>
+</div>
+
+
+<!--message Ruslt-->
+<div id="messageRuslt1">
+   
+    <h1 class="reulstTest">תוצאות הבדיקה</h1>
+    <div id="main">
+        <h2>ראשי</h2>
+    <!-- <p id="StartOfLineENV00101" onmouseover="showTooltip('StartOfLineENV00101','StartOfLineENV00101Eror')" onmouseout="hideTooltip('StartOfLineENV00101Eror')" ></p>
+    <p id="nameDocument" onmouseover="showTooltip('nameDocument','nameDocumentEror')" onmouseout="hideTooltip('nameDocumentEror')" ></p>
+    <p id="typeDocument" onmouseover="showTooltip('typeDocument','typeDocumentEror')" onmouseout="hideTooltip('typeDocumentEror')" >סוג תעודה</p>
+    <p >מספר תעודה</p>
+    <p>שם ספק</p>
+    <p>מספר ספק</p>
+    <p id="NumReceivingFromeDocument" onmouseover="showTooltip('NumReceivingFromeDocument','NumReceivingFromeDocumentEror')" onmouseout="hideTooltip('NumReceivingFromeDocumentEror')" >שם הרשת</p>
+    <p>מספר רשת</p>
+    <p id="numBranche" onmouseover="showTooltip('numBranche','numBrancheEror')" onmouseout="hideTooltip('numBrancheEror')">שם הסניף</p>
+    <p>תאריך תעודה</p> -->
+
+
+
+    <p id="messageRuslt"></p>
+</div>
+
+
+<div id="constantValues">
+    <h2>ערכים קבועים</h2>
+</div>
+
+<div id="barcodes"></div>
+
+
+</div>
+
+
+<div id="erorWindos">
+<!-- <div id="NumReceivingFromeDocumentEror"></div>
+<div id="typeDocumentEror"></div>
+<div id="numBrancheEror"></div>
+<div id="StartOfLineENV00101Eror"></div>
+<div id="nameDocumentEror"></div>
+<div id="constantValueseEror"></div> -->
+</div>
+
+
+
+
+<br><br><br>
+
+
+
+
+
+
+<!--multiple certificates-->
+<h4 class="moreFile" style="position: absolute ;font-size:12px;color: red;;right: 230px;top:223px">הזן מספר תעודה מתוך
+    תעודות מרובות</h4>
+<!--up file input+drop-->
+<div class="upFile">
+    <h1 id="titelFile">קבצים</h1>
+    <div class="files">
+        <!--drop file+up file-->
+        <div id="drop-zone" ondrop="handleDrop(event)" ondragover="handleDragOver(event)">
+            <!--Paragraph of the initial screen-->
+            <div class="titelUpFile" style="display: block">
+                <h1 style="font-size: 40px;color: #858a85;position: relative;right: 6px" id="titelUpFileH"> ברוכים הבאים למסך EDI בדיקות
+                    מסרי </h1>
+                <p7 style="font-size:23px;color: #858a85;position: relative;top:-20px;right: 9px" id="titelUpFileP">אנא בחרו או גררו קובץ
+                    שברצונכם לבדוק
+                </p7>
+            </div>
+            <!--Upload button-->
+            <button id="upload-icon" onclick="triggerFileInput()"></button>
+            <!--File upload icon+css-->
+            <div class="iconAndhandleDrop">
+                <i class="material-icons upload-icon" id="icons" onclick="triggerFileInput()"
+                >cloud_upload</i>
+                <p style="position: relative;top:-10px;font-size: 20px;" id="iconAndhandleDropP"
+                   onclick="triggerFileInput()">גרור קובץ לכאן
+                    <br>או</p>
+            </div>
+            <!--     Just the button's div-->
+            <button id="upload-iconDiv" onclick="triggerFileInput()">בחר קובץ</button>
+            <!--The name of the uploaded file+css-->
+            <div id="file-name" style=" display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 0px;
+      position: relative;
+      top: 49%;
+      /*right: 250px;*/
+      font-size: 15px;
+      color: #ff0000;
+    display: none;"></div>
+        </div>
+        <!--input to select a file-->
+        <input type="file" id="file-input" onchange="handleFileInput(event)"/>
+    </div>
+
+</div>
+
+
+<textarea id="fileChek">
+</textarea>
+<div id="output"></div>
+
+
+
+<div id="erorMss"><p>נראה שנבחרה תעודה מסוג FLAT,אך נראה שהתעודה ללא TYPE של תעודת משלוח </p>
+    <button id="buttonEror">סגור</button>
+</div>
+<script>
+
+
+
+
+
+
+
+
+
+
+
+
+const textarea = document.getElementById("fileChek");
+        const output = document.getElementById("output");
+
+        textarea.addEventListener("mousemove", function(event) {
+            const cursorPosition = textarea.selectionStart;
+            const text = textarea.value;
+            const row = text.substr(0, cursorPosition).split("\n").length;
+            const col = cursorPosition - text.lastIndexOf("\n", cursorPosition - 1);
+
+            output.textContent = `Row: ${row}, Column: ${col}`;
+        });
+
+
+
+
+    function toggleFunction() {
+        var checkBox = document.querySelector('input[type="checkbox"]');
+        if (checkBox.checked) {
+            darkMode();
+
+        } else {
+            brightMode();
+        }
+
+    }
+
+
+
+
+
+
+
+
+    function checkEnter(event) {
+        const AllData = document.querySelector('.AllData');
+        if (AllData.style.display === "block") {
+            if (event.key === 'Enter') {
+                // var selectedOption = document.getElementById("menuTypeStructure").value;
+                // var fileTypeC = document.getElementById("menuTypefile").value;
+                // if (selectedOption === "fileStructure") {
+                //     alert("לא נבחר מבנה המסר לבדיקה");
+                // } else if (selectedOption === "fletFile") {
+                //     if (fileTypeC==="fileType"){
+                //         alert("לא נבחר סוג המסר לבדיקה");
+                //     }
+                //     else if (fileTypeC === "supdes"){
+                //         chekFileFletSupdes();
+                //     }
+                //     else if (fileTypeC === "order"){
+                //         chekFileFletOrder();
+                //     }
+                //     else if (fileTypeC === "mmdr"){
+                //         console.log("mmdr")
+                //     }
+                //     else if (fileTypeC === "return"){
+                //         console.log("return")
+                //     }
+
+                // }
+                // else if (selectedOption === "hashavshevt") {
+                //     chekFileHashavshevtSupdes();
+                // }
+
+            //     if(!fileChek.value.includes("ENV")){
+            //    chekFileFletSupdes();
+            // }else{
+            //     chekFileHashavshevtSupdes();
+            // }
+            if(fileChek.value.includes("ENV")){
+               if(fileChek.value.includes("SUPDES")){
+                // const typeDocumentHtml = document.getElementById("typeDocument");
+                // typeDocumentHtml.innerHTML="סוג תעודה: משלוח";
+                supdesFlat();
+               }
+               else{
+                alert("נראה שנבחרה תעודה מסוג FLAT,אך נראה שהתעודה ללא TYPE של תעודת משלוח ")
+               }
+             
+             }else{
+                 chekFileHashavshevtSupdes();
+             }
+            }
+
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const searchInput = document.getElementById("supplier");
+        const selectedValueInput = document.getElementById("selectedValue");
+
+        // Fetch data from JSON file (replace 'data.json' with your file)
+        fetch('data.json')
+            .then(response => response.json())
+            .then(data => {
+                // Populate the datalist with values from the JSON file
+                populateDatalist(data);
+            })
+            .catch(error => console.error('Error fetching data:', error));
+
+        function populateDatalist(data) {
+            const datalist = document.getElementById("jsonValues");
+
+            // Clear previous options
+            datalist.innerHTML = '';
+
+            // Add options based on the data
+            data.forEach(item => {
+                const option = document.createElement("option");
+                option.value = item.key;
+                option.dataset.value = item.value; // Set the data-value attribute
+                datalist.appendChild(option);
+            });
+        }
+
+        searchInput.addEventListener("input", function () {
+            const inputValue = searchInput.value.toLowerCase(); // Convert to lowercase for case-insensitive comparison
+            const datalist = document.getElementById("jsonValues");
+
+            // Find the selected value in the datalist based on key or value
+            const selectedOption = Array.from(datalist.options).find(option =>
+                option.value.toLowerCase() === inputValue || option.dataset.value.toLowerCase() === inputValue
+            );
+
+            if (selectedOption) {
+                // If a matching value is found, update the selected value input with the key
+                selectedValueInput.value = selectedOption.value;
+            } else {
+                // Clear the selected input value if no match is found
+                selectedValueInput.value = '';
+            }
+        });
+
+        searchInput.addEventListener("change", function () {
+            const inputValue = searchInput.value;
+            const datalist = document.getElementById("jsonValues");
+
+            // Find the selected value in the datalist
+            const selectedOption = Array.from(datalist.options).find(option => option.value === inputValue);
+
+            if (selectedOption) {
+                // Update the search input with the selected key's value
+                searchInput.value = selectedOption.dataset.value;
+            }
+        });
+    });
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const searchInput = document.getElementById("retailer");
+        const selectedValueInput = document.getElementById("selectedValueRetailer");
+
+        // Fetch data from JSON file (replace 'data.json' with your file)
+        fetch('retailerData.json')
+            .then(response => response.json())
+            .then(data => {
+                // Populate the datalist with values from the JSON file
+                populateDatalist(data);
+            })
+            .catch(error => console.error('Error fetching data:', error));
+
+        function populateDatalist(data) {
+            const datalist = document.getElementById("jsonValuesRetailer");
+
+            // Clear previous options
+            datalist.innerHTML = '';
+
+            // Add options based on the data
+            data.forEach(item => {
+                const option = document.createElement("option");
+                option.value = item.key;
+                option.dataset.value = item.value; // Set the data-value attribute
+                datalist.appendChild(option);
+            });
+        }
+
+        searchInput.addEventListener("input", function () {
+            const inputValue = searchInput.value.toLowerCase(); // Convert to lowercase for case-insensitive comparison
+            const datalist = document.getElementById("jsonValuesRetailer");
+
+            // Find the selected value in the datalist based on key or value
+            const selectedOption = Array.from(datalist.options).find(option =>
+                option.value.toLowerCase() === inputValue || option.dataset.value.toLowerCase() === inputValue
+            );
+
+            if (selectedOption) {
+                // If a matching value is found, update the selected value input with the key
+                selectedValueInput.value = selectedOption.value;
+            } else {
+                // Clear the selected input value if no match is found
+                selectedValueInput.value = '';
+            }
+        });
+
+        searchInput.addEventListener("change", function () {
+            const inputValue = searchInput.value;
+            const datalist = document.getElementById("jsonValuesRetailer");
+
+            // Find the selected value in the datalist
+            const selectedOption = Array.from(datalist.options).find(option => option.value === inputValue);
+
+            if (selectedOption) {
+                // Update the search input with the selected key's value
+                searchInput.value = selectedOption.dataset.value;
+            }
+        });
+    });
+
+
+
+
+
+
+
+</script>
+
+
+</body>
+</html>
+
+
+
+
+
