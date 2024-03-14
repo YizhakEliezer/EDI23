@@ -21,18 +21,13 @@ function darkMode(){
     const reulstTest = document.querySelector(".reulstTest");
     const filename = document.getElementById("file-name");
     const moreFile = document.querySelector(".moreFile");
-
-
     const messageRuslt1 = document.getElementById("messageRuslt1");
-    // var messageRuslt1H2 = messageRuslt1.querySelectorAll('h2');
- 
+    const RowColumn = document.getElementById("RowColumn");
 
+
+
+    RowColumn.style.color = "white";
       messageRuslt1.style.color = "#474545";
-    //  messageRuslt1H2.style.color = "rgb(160 210 233)";
-
-
-
-   
     body.style.backgroundColor = "#232020";
     uploadicon.style.backgroundColor = "#575151";
     titelUpFileH.style.color = "white";
@@ -102,14 +97,13 @@ function brightMode(){
     const reulstTest = document.querySelector(".reulstTest");
     const filename = document.getElementById("file-name");
     const moreFile = document.querySelector(".moreFile");
-
     const messageRuslt1 = document.getElementById("messageRuslt1");
-//    var messageRuslt1H2 = messageRuslt1.querySelector('h2');
+    const RowColumn = document.getElementById("RowColumn");
 
 
+
+    RowColumn.style.color = "#3f3d3d";
     messageRuslt1.style.color = "#474545";
-    // messageRuslt1H2.style.color = "#5b737f";
-
     body.style.backgroundColor = "#f0f0f3";
     uploadicon.style.backgroundColor = "white";
     titelUpFileH.style.color = "#858a85";

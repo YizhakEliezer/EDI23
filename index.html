@@ -196,14 +196,13 @@
 </div>
 
 
-<textarea id="fileChek">
-</textarea>
-<div id="output"></div>
+<textarea id="fileChek"></textarea>
+<div id="RowColumn"></div>
 
 
 
-<div id="erorMss"><p>נראה שנבחרה תעודה מסוג FLAT,אך נראה שהתעודה ללא TYPE של תעודת משלוח </p>
-    <button id="buttonEror">סגור</button>
+<div id="erorMss"><p id="erorP"></p>
+<button id="buttonEror" onclick="document.getElementById('erorMss').style.display= 'none'">סגור</button>
 </div>
 <script>
 
@@ -219,7 +218,7 @@
 
 
 const textarea = document.getElementById("fileChek");
-        const output = document.getElementById("output");
+        const output = document.getElementById("RowColumn");
 
         textarea.addEventListener("mousemove", function(event) {
             const cursorPosition = textarea.selectionStart;
@@ -229,6 +228,8 @@ const textarea = document.getElementById("fileChek");
 
             output.textContent = `Row: ${row}, Column: ${col}`;
         });
+
+
 
 
 
@@ -286,19 +287,27 @@ const textarea = document.getElementById("fileChek");
             // }else{
             //     chekFileHashavshevtSupdes();
             // }
+           
+
             if(fileChek.value.includes("ENV")){
                if(fileChek.value.includes("SUPDES")){
-                // const typeDocumentHtml = document.getElementById("typeDocument");
-                // typeDocumentHtml.innerHTML="סוג תעודה: משלוח";
+                try{
+                    document.getElementById("buttonEror").click();
+                }catch(e){}
                 supdesFlat();
                }
                else{
-                alert("נראה שנבחרה תעודה מסוג FLAT,אך נראה שהתעודה ללא TYPE של תעודת משלוח ")
+                const erorMss = document.getElementById('erorMss');
+                    erorMss.style.display = "block";
+                     const erorMssP = document.getElementById('erorP');
+                     erorMssP.innerHTML=" נראה שהתעודה שנבחרה ללא סוג מסר רצוי לבדיקה , או שהערך של 'סוג תעודה' במסר שגוי";
                }
              
-             }else{
+             }
+             else{
                  chekFileHashavshevtSupdes();
              }
+
             }
 
         }

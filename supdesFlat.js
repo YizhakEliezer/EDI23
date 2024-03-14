@@ -169,6 +169,41 @@ async function supdesFlat() {
 
 //**************************************Variable values in the message**************************************************** */
 
+
+
+
+
+
+    //type mass line 1, 33-47  main div
+    if (!compareStringsIgnoreCaseAndSpace(typeDocument, SUPDES)) {
+        try {
+            typeDocumentomHtmlEror.remove();
+            typeDocumentFromeHtml.remove();
+        } catch (e) { }
+        messageRusltconstantValuesMain("typeDocumentFromeHtml", "typeDocumentomHtmlEror");
+        typeDocumentomHtmlEror.innerHTML = "33-47 , חסר או שגוי ,שורה 1 SUPDES ערך";
+        typeDocumentFromeHtml.innerHTML = "סוג תעודה: משלוח"
+        iconX(typeDocumentFromeHtml);
+    } else {
+        try {
+            typeDocumentomHtmlEror.remove();
+            typeDocumentFromeHtml.remove();
+        } catch (e) { }
+        messageRusltconstantValuesMain("typeDocumentFromeHtml", "typeDocumentomHtmlEror");
+        typeDocumentFromeHtml.innerHTML = "סוג תעודה: משלוח"
+        iconV(typeDocumentFromeHtml);
+
+    }
+
+
+
+
+
+
+
+
+
+
     //num Receiver line 1, 8-23 main div
     const re = await fetch("retailerData.json");
     const response = await re.json();
@@ -242,20 +277,6 @@ async function supdesFlat() {
        numBranchRetailerFromeDocumentHtmlEror.innerHTML = "סניף לא ידוע ,שורה 2, 154-169";
        iconX(numBranchRetailerFromeDocumentHtml);
    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -358,25 +379,22 @@ async function supdesFlat() {
 
 
 
-    //type mass line 1, 33-47  main div
-    if (!compareStringsIgnoreCaseAndSpace(typeDocument, SUPDES)) {
+    //StartOfLineHEAD0101 line 2, 0-8  constantValues div
+    if (!compareStringsIgnoreCaseAndSpace(StartOfLineHEAD0101, HEAD0101)) {
         try {
-            typeDocumentomHtmlEror.remove();
-            typeDocumentFromeHtml.remove();
+            HEAD01011.remove();
+            HEAD0101Eror.remove();
         } catch (e) { }
-        messageRusltconstantValuesMain("typeDocumentFromeHtml", "typeDocumentomHtmlEror");
-        typeDocumentomHtmlEror.innerHTML = "33-47 , חסר או שגוי ,שורה 1 SUPDES ערך";
-        typeDocumentFromeHtml.innerHTML = "סוג תעודה: משלוח"
-        iconX(typeDocumentFromeHtml);
-    } else {
+        messageRusltconstantValues("HEAD01011", "HEAD0101Eror");
+        HEAD01011.innerHTML += "שגוי HEAD0101" + "<br>";
+        HEAD0101Eror.innerHTML = "0-8 , חסר או שגוי, שורה 2 HEAD0101 ערך";
+        iconX(HEAD01011);
+    }
+    else {
         try {
-            typeDocumentomHtmlEror.remove();
-            typeDocumentFromeHtml.remove();
+            HEAD01011.remove();
+            HEAD0101Eror.remove();
         } catch (e) { }
-        messageRusltconstantValuesMain("typeDocumentFromeHtml", "typeDocumentomHtmlEror");
-        typeDocumentFromeHtml.innerHTML = "סוג תעודה: משלוח"
-        iconV(typeDocumentFromeHtml);
-
     }
 
 
@@ -392,12 +410,8 @@ async function supdesFlat() {
 
 
 
-    //     const messageRuslt1 = document.getElementById("messageRuslt1");
-    //     if (valueKey != "" && StartOfLineENV00101FromFile.innerHTML === "" &&nameDocument.innerHTML === "") {
-    //         messageRuslt1.style.border = "7px solid #8ad78c";
-    //     } else {
-    //         messageRuslt1.style.border = "7px solid #fbb7b7";
-    //     }
+
+
 
 
    

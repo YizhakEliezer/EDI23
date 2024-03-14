@@ -475,7 +475,7 @@ left: 10px;
 
 }
 
-#output{
+#RowColumn{
     position: absolute;
     right: 540px;
     top: 580px;
@@ -528,7 +528,7 @@ left: 10px;
 #erorMss{
     color: #ffffffb3;
     background: #323232;
-        border-radius: 4px;
+        border-radius: 6px;
 text-align: center;
 font-size: 16px;
 position: absolute;
@@ -536,8 +536,10 @@ overflow: auto;
 word-wrap: break-word;
 height: 11%;
 width: 20%;
-left: 42%;
+left: 40%;
 top: 80%;
+display: none;
+border: 2px solid white;
 
 }
 
@@ -551,14 +553,22 @@ top: 80%;
 }
 
 
-#erorMss button{
+#erorMss button {
     position: relative;
     overflow: auto; 
     word-wrap: break-word;
-    color: #b0bec5;
+    color: #b5d0dd;
     border-radius: 2px;
-    background: #5a5555;
+      background: #444141; 
         width: 50px;
     height: 30px;
 font-size:17px; 
+border: 1px solid rgb(116, 104, 104); 
+cursor: pointer; 
+}
+
+#erorMss  button:hover {
+    background: #5a5555;
+    color: #94cde9;
+    border: 1px solid rgb(151, 140, 140); 
 }

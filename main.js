@@ -130,9 +130,21 @@ function checkForValue(file) {
        
 
             if(fileChek.value.includes("ENV")){
-                supdesFlat();
-
-             }else{
+                if(fileChek.value.includes("SUPDES")){
+                    try{
+                        document.getElementById("buttonEror").click();
+                    }catch(e){}
+                 supdesFlat();
+                }
+                else{
+                 const erorMss = document.getElementById('erorMss');
+                     erorMss.style.display = "block";
+                      const erorMssP = document.getElementById('erorP');
+                      erorMssP.innerHTML=" נראה שהתעודה שנבחרה ללא סוג מסר רצוי לבדיקה , או שהערך של 'סוג תעודה' במסר שגוי";
+                }
+              
+              }
+             else{
                  chekFileHashavshevtSupdes();
              }
  
