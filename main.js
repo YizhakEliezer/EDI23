@@ -131,16 +131,24 @@ function checkForValue(file) {
 
             if(fileChek.value.includes("ENV")){
                 if(fileChek.value.includes("SUPDES")){
-                    try{
-                        document.getElementById("buttonEror").click();
-                    }catch(e){}
+                 try{
+                     document.getElementById("buttonEror").click();
+                 }catch(e){}
                  supdesFlat();
                 }
                 else{
                  const erorMss = document.getElementById('erorMss');
                      erorMss.style.display = "block";
                       const erorMssP = document.getElementById('erorP');
-                      erorMssP.innerHTML=" נראה שהתעודה שנבחרה ללא סוג מסר רצוי לבדיקה , או שהערך של 'סוג תעודה' במסר שגוי";
+                      erorMssP.innerHTML="נראה שהתעודה שנבחרה ללא סוג מסר רצוי לבדיקה , או שהערך של 'סוג תעודה' במסר שגוי";
+                      erorMssP.innerHTML+="<br>"+" אנא בחר את סוג התעודה לבדיקה ולאחר מכן לחץ אנטר";
+ 
+                      var TypeSelect = document.getElementById("erorMssSelect").value;
+                      if (TypeSelect === "supdes") {
+                         supdesFlat();
+                         document.getElementById('erorMss').style.display= 'none';
+                      }
+ 
                 }
               
               }
@@ -315,6 +323,49 @@ function messageRusltconstantValuesMain(idValue,idValueEror){
     idValueE.setAttribute("onmouseout", "hideTooltip("+"'"+idValueEror+"'"+")");
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+// function messageRusltBarcodes(StartOfLineENV00101,idValueEror){
+
+//     const constantValues = document.getElementById('main');
+//     constantValues.style.display="block"
+//     const constantValuesP = document.createElement('p');
+//     constantValuesP.id =idValue;
+//     constantValues.appendChild(constantValuesP);
+//     const idValueE = document.getElementById(idValue);
+  
+
+//     const erorWindos = document.getElementById('erorWindos');
+//     const erorWindosDiv = document.createElement('div');
+//     erorWindosDiv.id = idValueEror;
+//     erorWindos.appendChild(erorWindosDiv);
+
+
+
+//     idValueE.setAttribute("onmouseover", "showTooltip("+"'"+idValue+"'"+","+"'"+idValueEror+"'"+")");
+//     idValueE.setAttribute("onmouseout", "hideTooltip("+"'"+idValueEror+"'"+")");
+
+// }
+
+
+
+
+
+
+
+
+
+
 
 
 

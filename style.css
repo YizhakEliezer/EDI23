@@ -462,23 +462,34 @@ left: 10px;
 }
 
 
+#erorWindos {
+    position: absolute;
+    left: -100px;
+ 
+}
 
 #erorWindos div {
     display: none;
     position: absolute;
     padding: 10px;
-    background-color: #3f3d3d;
+     background-color: #FFD43B; 
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     font-size: 11px;
-
+     width: 300px; 
+    text-align: center;
+color: black;
+font-weight: bold;
 }
+
+
+
 
 #RowColumn{
     position: absolute;
-    right: 540px;
-    top: 580px;
+    right: 530px;
+    top: 650px;
     color: #3f3d3d;
 }
 
@@ -510,6 +521,7 @@ left: 10px;
      right: -15px;
      top: 2px;
 
+
 }
 
 
@@ -534,13 +546,12 @@ font-size: 16px;
 position: absolute;
 overflow: auto; 
 word-wrap: break-word;
-height: 11%;
+height: 12%;
 width: 20%;
 left: 40%;
 top: 80%;
 display: none;
-border: 2px solid white;
-
+border: 1px solid white; 
 }
 
 
@@ -550,6 +561,7 @@ border: 2px solid white;
     overflow: auto; /* or overflow: hidden; or overflow: scroll; depending on your preference */
     word-wrap: break-word;
     margin: 10px; 
+    color: #bad2e0;
 }
 
 
@@ -563,7 +575,7 @@ border: 2px solid white;
         width: 50px;
     height: 30px;
 font-size:17px; 
-border: 1px solid rgb(116, 104, 104); 
+border: 2px solid rgb(116, 104, 104); 
 cursor: pointer; 
 }
 
@@ -572,3 +584,64 @@ cursor: pointer;
     color: #94cde9;
     border: 1px solid rgb(151, 140, 140); 
 }
+
+
+#erorMssSelect{
+    color: #b5d0dd;
+    background: #444141;
+    border: 2px solid rgb(116, 104, 104); 
+    position: relative;
+    cursor: pointer; 
+height: 25px;
+}
+
+
+
+
+
+#barcodes{
+    position: relative;
+    overflow: auto; /* or overflow: hidden; or overflow: scroll; depending on your preference */
+    word-wrap: break-word; /* or white-space: pre-wrap; to wrap long words */
+    top: 60px;
+    /* display: none; */
+    right: 15px;
+    border: 1px solid #969292;
+    width: 85%;
+    left:7%;
+    
+
+}
+
+
+
+#barcodes p{
+    right: 25px;
+  }
+  
+  
+  #barcodes i{
+      position: absolute;
+       right: -15px;
+       top: 2px;
+  
+  
+  }
+
+
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+  }
+  th, td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+   
+  }
+  th {
+    background-color: #a09999;
+    text-align: center;
+  }

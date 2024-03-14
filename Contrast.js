@@ -24,6 +24,23 @@ function darkMode(){
     const messageRuslt1 = document.getElementById("messageRuslt1");
     const RowColumn = document.getElementById("RowColumn");
 
+    
+
+
+    var errorWindos = document.getElementById("erorWindos");
+    if (errorWindos) {
+        var divInsideErrorWindos = errorWindos.querySelector("div");
+    
+        if (divInsideErrorWindos) {
+            divInsideErrorWindos.style.backgroundColor = "black";
+        } else {
+            console.error("No div element found inside 'erorWindos'.");
+            console.log("Contents of 'erorWindos':", errorWindos.innerHTML);
+        }
+    } else {
+        console.error("Could not find element with ID 'erorWindos'.");
+    }
+
 
 
     RowColumn.style.color = "white";

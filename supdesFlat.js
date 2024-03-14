@@ -10,6 +10,41 @@ async function supdesFlat() {
     myArrayBarcodes = [];
 
 
+
+
+
+
+    //Ignoring lines with spaces at the end of the file or in the middle of the file
+    let nonEmptyLines = [];
+    let consecutiveEmptyLines = 0;
+    for (let j = 0; j < lines.length; j++) {
+        const currentLine = lines[j].trim();
+        if (currentLine === "") {
+            consecutiveEmptyLines++;
+        } else {
+            if (consecutiveEmptyLines > 0) {
+                nonEmptyLines.push("");
+                consecutiveEmptyLines = 0;
+            }
+            nonEmptyLines.push(currentLine);
+        }
+
+    }
+    lines.length = lines.length - (consecutiveEmptyLines);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     //icons v and x 
     const messageIconX = document.getElementById('messageIconX');
     const messageIconV = document.getElementById('messageIconV');
@@ -40,6 +75,22 @@ async function supdesFlat() {
     const numMessage = document.getElementById('message').value;
     const numSupplierSubnetNumber = document.getElementById('supplierSubnetNumber').value;
     const numBranchRetailer = document.getElementById('branchRetailer').value;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -95,37 +146,7 @@ async function supdesFlat() {
     //valueFromFile One line before last
     const StartOfLineHEAD9901 = lines[lines.length - 2].substring(0, 8);
     //valueFromFile last line
-    const StartOfLineENV00201 = lines[lines.length - 1].substring(0, 8);
-
-
-
-
-
-
-
-
-
-
-
-    //Ignoring lines with spaces at the end of the file or in the middle of the file
-    let nonEmptyLines = [];
-    let consecutiveEmptyLines = 0;
-    for (let j = 0; j < lines.length; j++) {
-        const currentLine = lines[j].trim();
-        if (currentLine === "") {
-            consecutiveEmptyLines++;
-        } else {
-            if (consecutiveEmptyLines > 0) {
-                nonEmptyLines.push("");
-                consecutiveEmptyLines = 0;
-            }
-            nonEmptyLines.push(currentLine);
-        }
-
-    }
-    lines.length = lines.length - (consecutiveEmptyLines);
-
-
+    const StartOfLineENV00201 = lines[lines.length -1].substring(0, 8);
 
 
 
@@ -181,7 +202,7 @@ async function supdesFlat() {
             typeDocumentFromeHtml.remove();
         } catch (e) { }
         messageRusltconstantValuesMain("typeDocumentFromeHtml", "typeDocumentomHtmlEror");
-        typeDocumentomHtmlEror.innerHTML = "33-47 , חסר או שגוי ,שורה 1 SUPDES ערך";
+        typeDocumentomHtmlEror.innerHTML = "33-47 , חסר או שגוי ,שורה 1 "+typeDocument+" ערך";
         typeDocumentFromeHtml.innerHTML = "סוג תעודה: משלוח"
         iconX(typeDocumentFromeHtml);
     } else {
@@ -321,6 +342,45 @@ async function supdesFlat() {
 
 
 
+
+
+
+
+
+
+               //num Sender Subnet line 2, 104-119 main div
+               if (numSupplierSubnetNumberFromeDocument.trim()=== numSenderFromeDocument.trim()) {
+                try {
+                    SupplierSubnetHtml.remove();
+                    SupplierSubnetHtmlEror.remove();
+                } catch (e) { }
+                messageRusltconstantValuesMain("SupplierSubnetHtml", "SupplierSubnetHtmlEror");
+                SupplierSubnetHtml.innerHTML += "תת ספק : " + numSupplierSubnetNumberFromeDocument;
+                SupplierSubnetHtmlEror.innerHTML = "נראה שמספר התת ספק <span style='color:#ff0000'>'תואם'</span> למספק הספק הראשי, במידה והספק היה מעוניין לשלוח תחת תת ספק מסוים אז ישנה טעות בשידור , שורה 2 ,104-119";
+                iconExclamationMark(SupplierSubnetHtml);
+               
+            } else {
+                try {
+                    SupplierSubnetHtml.remove();
+                    SupplierSubnetHtmlEror.remove();
+                } catch (e) { }
+                messageRusltconstantValuesMain("SupplierSubnetHtml", "SupplierSubnetHtmlEror");
+                SupplierSubnetHtml.innerHTML += "תת ספק : " + numSupplierSubnetNumberFromeDocument;
+                SupplierSubnetHtmlEror.innerHTML = "נראה שמספר התת ספק <span style='color:#ff0000'>'שונה'</span> ממספר הספק הראשי, במידה והספק היה מעוניין לשלוח תחת תת ספק בדוק שאכן התת הספק הנ'ל מוקם תקין , שורה 2 ,104-119";
+                 iconExclamationMark(SupplierSubnetHtml);
+             
+            }
+       
+       
+
+         
+
+
+
+
+
+
+
  
 
 
@@ -342,7 +402,7 @@ async function supdesFlat() {
         } catch (e) { }
         messageRusltconstantValues("ENV001011", "ENV00101Eror");
         ENV001011.innerHTML += "שגוי ENV00101" + "<br>";
-        ENV00101Eror.innerHTML = "0-8 , חסר או שגוי, שורה 1 ENV00101 ערך";
+        ENV00101Eror.innerHTML = "0-8 , חסר או שגוי, שורה 1 "+StartOfLineENV00101+" ערך";
         iconX(ENV001011);
     }
     else {
@@ -363,7 +423,7 @@ async function supdesFlat() {
         } catch (e) { }
         messageRusltconstantValues("MMDE02RMMDE02L", "MMDE02RMMDE02LEror");
         MMDE02RMMDE02L.innerHTML += "שגוי MMDE02R/MMDE02L" + "<br>";
-        MMDE02RMMDE02LEror.innerHTML = "23-33 , חסר או שגוי, שורה 1  MMDE02R/MMDE02L ערך";
+        MMDE02RMMDE02LEror.innerHTML = "23-33 , חסר או שגוי, שורה 1  "+nameDocument1+" ערך";
         iconX(MMDE02RMMDE02L);
     } else {
         try {
@@ -387,7 +447,7 @@ async function supdesFlat() {
         } catch (e) { }
         messageRusltconstantValues("HEAD01011", "HEAD0101Eror");
         HEAD01011.innerHTML += "שגוי HEAD0101" + "<br>";
-        HEAD0101Eror.innerHTML = "0-8 , חסר או שגוי, שורה 2 HEAD0101 ערך";
+        HEAD0101Eror.innerHTML = "0-8 , חסר או שגוי, שורה 2 "+StartOfLineHEAD0101+" ערך";
         iconX(HEAD01011);
     }
     else {
@@ -396,6 +456,94 @@ async function supdesFlat() {
             HEAD0101Eror.remove();
         } catch (e) { }
     }
+
+
+
+
+
+
+    
+    //StartOfLineLINE0001 line 3, 0-8  constantValues div
+    if (!compareStringsIgnoreCaseAndSpace(StartOfLineLINE0001, LINE0001)) {
+        try {
+            LINE00011.remove();
+            LINE0001Eror.remove();
+        } catch (e) { }
+        messageRusltconstantValues("LINE00011", "LINE0001Eror");
+        LINE00011.innerHTML += "שגוי LINE0001" + "<br>";
+        LINE0001Eror.innerHTML = "0-8 , חסר או שגוי, שורה 3 "+StartOfLineLINE0001+" ערך";
+        iconX(LINE00011);
+    }
+    else {
+        try {
+            LINE00011.remove();
+            LINE0001Eror.remove();
+        } catch (e) { }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+       //StartOfLineLINE0001 Second to last line, 0-8  constantValues div
+       if (!compareStringsIgnoreCaseAndSpace(StartOfLineHEAD9901, HEAD9901)) {
+        try {
+            HEAD99011.remove();
+            HEAD9901Eror.remove();
+        } catch (e) { }
+        messageRusltconstantValues("HEAD99011", "HEAD9901Eror");
+        HEAD99011.innerHTML += "שגוי HEAD9901" + "<br>";
+        HEAD9901Eror.innerHTML = "0-8 ,"+ (lines.length - 1) +" חסר או שגוי, שורה  "+StartOfLineHEAD9901+" ערך";
+        iconX(HEAD99011);
+    }
+    else {
+        try {
+            HEAD99011.remove();
+            HEAD9901Eror.remove();
+        } catch (e) { }
+    }
+
+
+
+
+
+
+         //StartOfLineENV00201 last line 3, 0-8  constantValues div
+         if (!compareStringsIgnoreCaseAndSpace(StartOfLineENV00201, ENV00201)) {
+            try {
+                ENV002011.remove();
+                ENV00201Eror.remove();
+            } catch (e) { }
+            messageRusltconstantValues("ENV002011", "ENV00201Eror");
+            ENV002011.innerHTML += "שגוי ENV00201" + "<br>";
+            ENV00201Eror.innerHTML = "0-8 ,"+ (lines.length - 0) +" חסר או שגוי, שורה  "+StartOfLineENV00201+" ערך";
+            iconX(ENV002011);
+        }
+        else {
+            try {
+                ENV002011.remove();
+                ENV00201Eror.remove();
+            } catch (e) { }
+        }
+    
+
+
+
+ 
+
+
+
+
+
+
 
 
 
@@ -444,7 +592,8 @@ function showTooltip(valueFromFile, eror) {
     var tooltip = document.getElementById(eror);
     var targetElement = document.getElementById(valueFromFile);
     var iconElement = targetElement.querySelector('.fa-x');
-    if (iconElement) {
+    var ExclamationMark = targetElement.querySelector('.fa-triangle-exclamation');
+    if (iconElement || ExclamationMark) {
         var rect = targetElement.getBoundingClientRect();
         var topPosition = rect.top + window.scrollY - tooltip.offsetHeight - 10;
         var leftPosition = rect.left + window.scrollX + (targetElement.offsetWidth - tooltip.offsetWidth) / 2;
@@ -474,6 +623,13 @@ function iconV(element) {
     return element.innerHTML += `<i  class="fa-solid fa-check" style="color: #54f000;font-size: 12px;"></i>`;
 
 }
+
+
+function iconExclamationMark(element) {
+    return element.innerHTML += `<i  class="fa-solid fa-triangle-exclamation" style="color: #FFD43B;font-size: 15px;"></i>`;
+
+}
+
 
 
 

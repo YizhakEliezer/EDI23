@@ -102,19 +102,6 @@
     <h1 class="reulstTest">תוצאות הבדיקה</h1>
     <div id="main">
         <h2>ראשי</h2>
-    <!-- <p id="StartOfLineENV00101" onmouseover="showTooltip('StartOfLineENV00101','StartOfLineENV00101Eror')" onmouseout="hideTooltip('StartOfLineENV00101Eror')" ></p>
-    <p id="nameDocument" onmouseover="showTooltip('nameDocument','nameDocumentEror')" onmouseout="hideTooltip('nameDocumentEror')" ></p>
-    <p id="typeDocument" onmouseover="showTooltip('typeDocument','typeDocumentEror')" onmouseout="hideTooltip('typeDocumentEror')" >סוג תעודה</p>
-    <p >מספר תעודה</p>
-    <p>שם ספק</p>
-    <p>מספר ספק</p>
-    <p id="NumReceivingFromeDocument" onmouseover="showTooltip('NumReceivingFromeDocument','NumReceivingFromeDocumentEror')" onmouseout="hideTooltip('NumReceivingFromeDocumentEror')" >שם הרשת</p>
-    <p>מספר רשת</p>
-    <p id="numBranche" onmouseover="showTooltip('numBranche','numBrancheEror')" onmouseout="hideTooltip('numBrancheEror')">שם הסניף</p>
-    <p>תאריך תעודה</p> -->
-
-
-
     <p id="messageRuslt"></p>
 </div>
 
@@ -123,19 +110,30 @@
     <h2>ערכים קבועים</h2>
 </div>
 
-<div id="barcodes"></div>
+<div id="barcodes">
+    <h2>ברקודים ומשטחים</h2>
+    <table>
+        <th>כמות יחדות</th>
+        <th>כמות אריזות</th>
+        <th>מק"ט</th>
+        <th>תחילית שורה</th>
+
+        <!-- <tr>
+            <td>כמות יחדות</td>
+            <td>כמות אריזות</td>
+            <td>מק"ט</td>
+            <td>תחילית שורה</td>
+          </tr> -->
+    </table>
+</div>
 
 
 </div>
 
 
 <div id="erorWindos">
-<!-- <div id="NumReceivingFromeDocumentEror"></div>
-<div id="typeDocumentEror"></div>
-<div id="numBrancheEror"></div>
-<div id="StartOfLineENV00101Eror"></div>
-<div id="nameDocumentEror"></div>
-<div id="constantValueseEror"></div> -->
+
+<div></div>
 </div>
 
 
@@ -202,7 +200,14 @@
 
 
 <div id="erorMss"><p id="erorP"></p>
-<button id="buttonEror" onclick="document.getElementById('erorMss').style.display= 'none'">סגור</button>
+    <select id="erorMssSelect" name="erorMssSelect">
+        <option value="">סוג מסר</option>
+        <option value="supdes">משלוח</option>
+        <option value="order">הזמנה</option>
+        <option value="entry">כניסה</option>
+        <option value="return">החזרה</option>
+    </select>
+<!-- <button id="buttonEror" onclick="document.getElementById('erorMss').style.display= 'none'">סגור</button> -->
 </div>
 <script>
 
@@ -300,7 +305,15 @@ const textarea = document.getElementById("fileChek");
                 const erorMss = document.getElementById('erorMss');
                     erorMss.style.display = "block";
                      const erorMssP = document.getElementById('erorP');
-                     erorMssP.innerHTML=" נראה שהתעודה שנבחרה ללא סוג מסר רצוי לבדיקה , או שהערך של 'סוג תעודה' במסר שגוי";
+                     erorMssP.innerHTML="נראה שהתעודה שנבחרה ללא סוג מסר רצוי לבדיקה , או שהערך של 'סוג תעודה' במסר שגוי";
+                     erorMssP.innerHTML+="<br>"+" אנא בחר את סוג התעודה לבדיקה ולאחר מכן לחץ אנטר";
+
+                     var TypeSelect = document.getElementById("erorMssSelect").value;
+                     if (TypeSelect === "supdes") {
+                        supdesFlat();
+                        document.getElementById('erorMss').style.display= 'none';
+                     }
+
                }
              
              }
