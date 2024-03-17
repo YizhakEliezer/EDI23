@@ -346,11 +346,11 @@ function messageRusltBarcodes(idValue,idValueEror){
     const constantValuesT = document.createElement('td');
     constantValuesT.id =idValue+"Y";
 
-    const constantValuesM = document.createElement('td');
-    constantValuesM.id =idValue+"A";
-
     const constantValuesA = document.createElement('td');
-    constantValuesA.id =idValue+"M";
+    constantValuesA.id =idValue+"A";
+
+    const constantValuesM = document.createElement('td');
+    constantValuesM.id =idValue+"M";
 
     const constantValuesY = document.createElement('td');
     constantValuesY.id =idValue+"T";
@@ -375,8 +375,24 @@ function messageRusltBarcodes(idValue,idValueEror){
 
 
 
+
+    const idValueA = document.getElementById(idValue+"A");
+
+    const erorWindosDivA= document.createElement('div');
+    erorWindosDivA.id = idValueEror+"A";
+    erorWindos.appendChild(erorWindosDivA);
+
+    
+
+
+
     idValueE.setAttribute("onmouseover", "showTooltip("+"'"+idValue+"'"+","+"'"+idValueEror+"'"+")");
     idValueE.setAttribute("onmouseout", "hideTooltip("+"'"+idValueEror+"'"+")");
+
+
+    idValueA.setAttribute("onmouseover", "showTooltip("+"'"+idValue+"A"+"'"+","+"'"+idValueEror+"A"+"'"+")");
+    idValueA.setAttribute("onmouseout", "hideTooltip("+"'"+idValueEror+"A"+"'"+")");
+
 
 }
 

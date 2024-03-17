@@ -39,63 +39,6 @@ async function supdesFlat() {
 
 
 
-
-
-
-
-
-
-    //icons v and x 
-    const messageIconX = document.getElementById('messageIconX');
-    const messageIconV = document.getElementById('messageIconV');
-    const supplierIconX = document.getElementById('supplierIconX');
-    const supplierIconV = document.getElementById('supplierIconV');
-    const retailerIconX = document.getElementById('retailerIconX');
-    const retailerIconV = document.getElementById('retailerIconV');
-    const branchRetailerIconV = document.getElementById('branchRetailerIconV');
-    const branchRetailerIconX = document.getElementById('branchRetailerIconX');
-    const supplierSubnetNumberIconX = document.getElementById('supplierSubnetNumberIconX');
-    const supplierSubnetNumberIconV = document.getElementById('supplierSubnetNumberIconV');
-    messageIconX.style.display = 'none';
-    messageIconV.style.display = 'none';
-    supplierIconX.style.display = 'none';
-    supplierIconV.style.display = 'none';
-    retailerIconX.style.display = 'none';
-    retailerIconV.style.display = 'none';
-    branchRetailerIconV.style.display = 'none';
-    branchRetailerIconX.style.display = 'none';
-    supplierSubnetNumberIconX.style.display = 'none';
-    supplierSubnetNumberIconV.style.display = 'none';
-
-
-
-    //variable input from the user
-    const NumReceivingFromeDocumentFromInput = document.getElementById('retailer').value.toLowerCase();
-    const numSupplier = document.getElementById('supplier').value;
-    const numMessage = document.getElementById('message').value;
-    const numSupplierSubnetNumber = document.getElementById('supplierSubnetNumber').value;
-    const numBranchRetailer = document.getElementById('branchRetailer').value;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     //fixed values in the certificate
     //line 1
     const ENV00101 = "ENV00101";
@@ -114,6 +57,8 @@ async function supdesFlat() {
     const HEAD9901 = "HEAD9901";
     //constant values last line
     const ENV00201 = "ENV00201";
+
+
 
 
 
@@ -213,6 +158,37 @@ async function supdesFlat() {
         messageRusltconstantValuesMain("typeDocumentFromeHtml", "typeDocumentomHtmlEror");
         typeDocumentFromeHtml.innerHTML = "סוג תעודה: משלוח"
         iconV(typeDocumentFromeHtml);
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+       //num mass line 1, 33-47  main div
+       if (numMessageFromeDocument.trim()==="") {
+        try {
+            numMessageFromHtmlEror.remove();
+            numMessageFromHtml.remove();
+        } catch (e) { }
+        messageRusltconstantValuesMain("numMessageFromHtml", "numMessageFromHtmlEror");
+        numMessageFromHtmlEror.innerHTML = "8-23 , ערך של מספר תעודה  חסר ,שורה 2";
+        numMessageFromHtml.innerHTML = "מספר  תעודה : " + numMessageFromeDocument;
+        iconX(numMessageFromHtml);
+    } else {
+        try {
+            numMessageFromHtmlEror.remove();
+            numMessageFromHtml.remove();
+        } catch (e) { }
+        messageRusltconstantValuesMain("numMessageFromHtml", "numMessageFromHtmlEror");
+        numMessageFromHtml.innerHTML = "מספר  תעודה : " + numMessageFromeDocument;
+        iconV(numMessageFromHtml);
 
     }
 
@@ -557,18 +533,18 @@ async function supdesFlat() {
 
 
 
+//******************************************barcodes ***************************************/
 
-
+    //DELET the table of barcodes
     const tdElementh = document.querySelectorAll('table');
     tdElementh.forEach(function (table) {
         table.remove();
     });
 
+   
 
 
-
-
-
+    //add table+th for the table
     const barcodes = document.getElementById('barcodes');
     const barcodesTable = document.createElement('table');
     barcodes.appendChild(barcodesTable);
@@ -585,72 +561,30 @@ async function supdesFlat() {
 
     barcodesThY.innerHTML = "כמות יחידות";
     barcodesThA.innerHTML = "כמות אריזות";
-    barcodesTM.innerHTML = "מק'ט";
+    barcodesTM.innerHTML = "ברקוד";
     barcodesTT.innerHTML = "תחילית שורה";
 
 
 
 
 
-
-
-    // const tdElements = document.querySelectorAll('td');
-    // tdElements.forEach(function(td) {
-    //     td.remove();
-    // });
-
-
-
-    // const barcodesTable = document.getElementById('barcodesTable');
-
-    // // Find the th element for the "Amount of packages" column
-    // const amountOfPackagesTh = barcodesTable.querySelector('th:nth-child(2)');
-
-    // // Loop through each row and add a td element under the "Amount of packages" column
-    // for (var i = 3; i < lines.length - 2; i++) {
-    //     // Create a new row element
-    //     const newRow = document.createElement('tr');
-
-    //     // Create a new td element
-    //     const newTd = document.createElement('td');
-
-    //     // Set the id attribute for the new td element
-    //     newTd.id = "amountOfPackages" + i; // You can adjust the id as needed
-
-    //     // Add content to the new td element (for example, the line index 'i')
-    //     newTd.textContent = i;
-
-    //     // Append the new td element to the new row
-    //     newRow.appendChild(newTd);
-
-    //     // Append the new row to the table
-    //     barcodesTable.appendChild(newRow);
-
-    //     document.getElementById("amountOfPackages" + i).innerHTML=i;
-
-    // }
-
-
-
-
-
-
-
+//Loop over all lines of the certificate
     for (var i = 3; i < lines.length - 2; i++) {
+        //variables
         const StartOfLineLINE0201 = lines[i].substring(0, 8);
         const StartOfLineLINE0101 = lines[i].substring(0, 8);
         const surfaceNumber = lines[i].substring(50, 68);
-
         const Barcodes = lines[i].substring(8, 23);
-
         const numPackaging = lines[i].substring(26, 41);
         const numSingul = lines[i].substring(41, 56);
 
+        //creat tr and td to the table
         messageRusltBarcodes("LINE0201Line" + i, "LINE0201erorLine" + i);
-        document.getElementById("LINE0201Line" + i + "T").innerHTML += i + 1;
-        document.getElementById("LINE0201Line" + i + "M").innerHTML = Barcodes;
 
-        document.getElementById("LINE0201Line" + i + "A").innerHTML = numPackaging;
+    
+        document.getElementById("LINE0201Line" + i + "T").innerHTML += i + 1;
+        document.getElementById("LINE0201Line" + i + "A").innerHTML = Barcodes;
+        document.getElementById("LINE0201Line" + i + "M").innerHTML = numPackaging;
         document.getElementById("LINE0201Line" + i + "Y").innerHTML = numSingul;
 
       
@@ -658,25 +592,35 @@ async function supdesFlat() {
 
             if (surfaceNumber.trim()=== "") {
                 document.getElementById("LINE0201Line" + i + "T").innerHTML += `<i  class="fa-solid fa-x" style="color: #fa0000;font-size: 12px;"></i>`;
-                document.getElementById("LINE0201erorLine" + i).innerHTML = "50-68 ," + (i + 1) + " ערך של מספר זיהוי משטח חסר או שגוי, שורה ";
+                document.getElementById("LINE0201erorLine" + i).innerHTML = "50-68 ," + (i + 1) + " ערך של מספר זיהוי משטח חסר , שורה ";
             }
         }
         else {
-            if (!compareStringsIgnoreCaseAndSpace(StartOfLineLINE0201, LINE0201)) {
+            if (!compareStringsIgnoreCaseAndSpace(StartOfLineLINE0201, LINE0201) && Barcodes.trim()=== "") {
                 document.getElementById("LINE0201Line" + i + "T").innerHTML += `<i  class="fa-solid fa-x" style="color: #fa0000;font-size: 12px;"></i>`;
-                document.getElementById("LINE0201erorLine" + i).innerHTML = "0-8 ," + (i + 1) + " חסר או שגוי, שורה  " + StartOfLineLINE0201 + " ערך";
+                document.getElementById("LINE0201erorLine" + i).innerHTML = "0-8 ," + (i + 1) + " חסר או שגוי, שורה  " + StartOfLineLINE0201 + " ערך"+"<br>";
+                document.getElementById("LINE0201Line" + i + "A").innerHTML += `<i  class="fa-solid fa-x" style="color: #fa0000;font-size: 12px;"></i>`;
+                 document.getElementById("LINE0201erorLine" + i + "A").innerHTML = "8-23 ," + (i + 1) + " ברקוד חסר , שורה ";
+               
+            }
+            else if(!compareStringsIgnoreCaseAndSpace(StartOfLineLINE0201, LINE0201)){
+                document.getElementById("LINE0201Line" + i + "T").innerHTML += `<i  class="fa-solid fa-x" style="color: #fa0000;font-size: 12px;"></i>`;
+                document.getElementById("LINE0201erorLine" + i).innerHTML = "0-8 ," + (i + 1) + " חסר או שגוי, שורה  " + StartOfLineLINE0201 + " ערך"+"<br>";
+            }
+             else if(Barcodes.trim()=== ""){
+                document.getElementById("LINE0201Line" + i + "T").innerHTML += `<i  class="fa-solid fa-x" style="color: #fa0000;font-size: 12px;"></i>`;
+                document.getElementById("LINE0201erorLine" + i ).innerHTML = "8-23 ," + (i + 1) + " ברקוד חסר , שורה ";
             }
 
+             
         }
 
 
+//******************************************barcodes ***************************************/
 
 
+        
 
-        if (Barcodes.trim()=== "") {
-            document.getElementById("LINE0201Line" + i + "M").innerHTML += `<i  class="fa-solid fa-x" style="color: #fa0000;font-size: 12px;"></i>`;
-            document.getElementById("LINE0201erorLine" + i).innerHTML = "8-23 ," + (i + 1) + " ברקוד חסר , שורה ";
-        }
 
 
 
@@ -686,53 +630,7 @@ async function supdesFlat() {
 
 
 
-    // const barcodes = document.getElementById('barcodes');
-    // const barcodesTable = document.createElement('table');
-    // barcodesTable.id = 'barcodesTable'; 
-    // barcodes.appendChild(barcodesTable); 
-    // const barcodesTable = document.getElementById('barcodes');
-    // const barcodesStartOfLine = document.createElement('th');
-    // barcodesTable.id = 'barcodesStartOfLine'; 
-    // barcodesTable.appendChild(barcodesStartOfLine);
-    // barcodesStartOfLine.innerHTML = "תחילית שורה";
-
-    // const barcodesStartOfLine = document.getElementById('barcodesStartOfLine');
-
-    //  for (var i = 3; i < lines.length -2; i++) {
-
-
-    //     // const tr = document.createElement('tr');
-    //     // tr.appendChild(barcodesStartOfLine);
-    //     // barcodesTable.appendChild(tr);
-    //     // // tr.innerHTML = i;
-
-    //     const StartOfLineLINE0201 = lines[i].substring(0, 8);
-    //     messageRusltBarcodes(`${StartOfLineLINE0201}`+"LIne"+i,`${StartOfLineLINE0201}`+"erorLine"+i);
-
-    //     // LINE0201LIne3.appendChild(barcodesStartOfLine);
-    //     //  barcodesTable.appendChild(LINE0201LIne3);
-    //       LINE0201LIne3.innerHTML = "dfgdg";
-
-
-    //     //   LINE0201LIne`${i}`.appendChild(barcodesStartOfLine);
-    //     //   barcodesTable.appendChild(LINE0201LIne`${i}`);
-    //     //   LINE0201LIne`${i}`.innerHTML = "dfgdg";
-
-    //     if (!compareStringsIgnoreCaseAndSpace(StartOfLineLINE0201, LINE0201)) {
-
-    //         } 
-
-    //     // const barcodesBarcode = document.createElement('th');
-    //     // barcodesBarcode.innerHTML = "ברקוד";
-    //     // const barcodesStartOfLine = document.createElement('th');
-    //     // barcodesStartOfLine.innerHTML = "תחילית שורה";
-    //     // const tr = document.createElement('tr');
-    //     // tr.appendChild(barcodesBarcode);
-    //     // barcodesTable.appendChild(tr);
-    //     // tr.appendChild(barcodesStartOfLine);
-    //     // barcodesTable.appendChild(tr);
-    //   }
-
+  
 
 
 

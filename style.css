@@ -621,15 +621,6 @@ display: none;
   }
   
   
-  #barcodes i{
-      position: absolute;
-       right: -15px;
-       top: 2px;
-  
-  
-  }
-
-
 
   table {
     width: 100%;
@@ -645,12 +636,12 @@ display: none;
   th {
     background-color: #a09999;
     text-align: center;
+    color: #020202;
   }
 
 
  #barcodes i{
     position: relative;
-
     top: -1px; 
 
 } 
