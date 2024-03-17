@@ -335,28 +335,50 @@ function messageRusltconstantValuesMain(idValue,idValueEror){
 
 
 
-// function messageRusltBarcodes(StartOfLineENV00101,idValueEror){
+function messageRusltBarcodes(idValue,idValueEror){
+    const barcodes = document.getElementById('barcodes');
+    const constantValues = document.getElementById('barcodesTable');
+    barcodes.style.display="block"
 
-//     const constantValues = document.getElementById('main');
-//     constantValues.style.display="block"
-//     const constantValuesP = document.createElement('p');
-//     constantValuesP.id =idValue;
-//     constantValues.appendChild(constantValuesP);
-//     const idValueE = document.getElementById(idValue);
+    const constantValuesTr = document.createElement('tr');
+    constantValuesTr.id =idValue;
+
+    const constantValuesT = document.createElement('td');
+    constantValuesT.id =idValue+"Y";
+
+    const constantValuesM = document.createElement('td');
+    constantValuesM.id =idValue+"A";
+
+    const constantValuesA = document.createElement('td');
+    constantValuesA.id =idValue+"M";
+
+    const constantValuesY = document.createElement('td');
+    constantValuesY.id =idValue+"T";
+
+
+    constantValues.appendChild(constantValuesTr);
+
+
+    constantValuesTr.appendChild(constantValuesT);
+    constantValuesTr.appendChild(constantValuesM);
+    constantValuesTr.appendChild(constantValuesA);
+     constantValuesTr.appendChild(constantValuesY);
+
+
+    const idValueE = document.getElementById(idValue);
   
 
-//     const erorWindos = document.getElementById('erorWindos');
-//     const erorWindosDiv = document.createElement('div');
-//     erorWindosDiv.id = idValueEror;
-//     erorWindos.appendChild(erorWindosDiv);
+    const erorWindos = document.getElementById('erorWindos');
+    const erorWindosDiv = document.createElement('div');
+    erorWindosDiv.id = idValueEror;
+    erorWindos.appendChild(erorWindosDiv);
 
 
 
-//     idValueE.setAttribute("onmouseover", "showTooltip("+"'"+idValue+"'"+","+"'"+idValueEror+"'"+")");
-//     idValueE.setAttribute("onmouseout", "hideTooltip("+"'"+idValueEror+"'"+")");
+    idValueE.setAttribute("onmouseover", "showTooltip("+"'"+idValue+"'"+","+"'"+idValueEror+"'"+")");
+    idValueE.setAttribute("onmouseout", "hideTooltip("+"'"+idValueEror+"'"+")");
 
-// }
-
+}
 
 
 

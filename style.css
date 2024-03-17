@@ -428,6 +428,7 @@ input:checked + .toggle-slider:before {
 
 
 
+
 #main {  
     border: 1px solid #969292;
     border-radius: 5px;
@@ -609,8 +610,8 @@ height: 25px;
     border: 1px solid #969292;
     width: 85%;
     left:7%;
-    
-
+  
+display: none; 
 }
 
 
@@ -639,9 +640,17 @@ height: 25px;
     border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
-   
+   text-align: center;
   }
   th {
     background-color: #a09999;
     text-align: center;
   }
+
+
+ #barcodes i{
+    position: relative;
+
+    top: -1px; 
+
+} 
