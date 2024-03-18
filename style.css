@@ -553,6 +553,8 @@ left: 40%;
 top: 80%;
 display: none;
 border: 1px solid white; 
+
+
 }
 
 
@@ -563,6 +565,9 @@ border: 1px solid white;
     word-wrap: break-word;
     margin: 10px; 
     color: #bad2e0;
+
+
+
 }
 
 

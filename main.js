@@ -401,6 +401,23 @@ function messageRusltBarcodes(idValue,idValueEror){
 
 
 
+// function messageRusltBarcodesA(idValue,idValueEror){
+ 
+//     const idValueE2 = document.getElementById(idValue);
+  
+
+//     const erorWindos = document.getElementById('erorWindos');
+//     const erorWindosDiv = document.createElement('div');
+//     erorWindosDiv.id = idValueEror;
+//     erorWindos.appendChild(erorWindosDiv);
+
+//     idValueE2.setAttribute("onmouseover", "showTooltip("+"'"+idValue+"'"+","+"'"+idValueEror+"'"+")");
+//     idValueE2.setAttribute("onmouseout", "hideTooltip("+"'"+idValueEror+"'"+")");
+
+// }
+
+
+
 
 
 

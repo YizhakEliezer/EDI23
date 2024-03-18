@@ -133,6 +133,7 @@ async function supdesFlat() {
 
 
 
+
     //**************************************Variable values in the message**************************************************** */
 
 
@@ -171,8 +172,8 @@ async function supdesFlat() {
 
 
 
-       //num mass line 1, 33-47  main div
-       if (numMessageFromeDocument.trim()==="") {
+    //num mass line 1, 33-47  main div
+    if (numMessageFromeDocument.trim() === "") {
         try {
             numMessageFromHtmlEror.remove();
             numMessageFromHtml.remove();
@@ -194,6 +195,65 @@ async function supdesFlat() {
 
 
 
+
+
+
+
+
+
+
+
+    //date mass line 2, 23-35  main div
+
+    try {
+        dateTimeHtmlEror.remove();
+        dateTimeHtml.remove();
+    } catch (e) { }
+    messageRusltconstantValuesMain("dateTimeHtml", "dateTimeHtmlEror");
+ 
+    if (booleneLength === false || isNaN(booleneLength)) {
+        iconXTime(dateTimeHtml);
+        dateTimeHtmlEror.innerHTML = ", פורמט תאריך  שגוי , מספר התווים או מיקום התאריך בקובץ שגוי    "+"<br>"+"  23-35  ,שורה 2" ;
+    } 
+      if (year < 2023 || isNaN(year) || timeDocument.substring(0, 4)==="") {
+        iconXTime(dateTimeHtml);
+        dateTimeHtmlEror.innerHTML +="<br>"+ "23-35 , פורמט תאריך שנה שגוי  ,שורה 2";
+    }
+
+      if (month < 1 || month > 12 || isNaN(month) || timeDocument.substring(4, 6)==="") {
+        iconXTime(dateTimeHtml);
+        dateTimeHtmlEror.innerHTML +="<br>"+ "23-35 , פורמט תאריך חודש שגוי  ,שורה 2";
+    }
+
+      if (day < 1 || day > 31 || isNaN(day) || timeDocument.substring(6, 8)==="") {
+        iconXTime(dateTimeHtml);
+        dateTimeHtmlEror.innerHTML +="<br>"+ "23-35 , פורמט תאריך יום שגוי  ,שורה 2";
+    }
+
+      if (hour < 0 || hour > 24 || isNaN(hour) || timeDocument.substring(8, 10)==="") {
+        iconXTime(dateTimeHtml);
+        dateTimeHtmlEror.innerHTML +="<br>"+ "23-35 , פורמט תאריך שעה שגוי  ,שורה 2";
+    }
+    
+      if(minute < 0 || minute > 59 || isNaN(minute) || timeDocument.substring(10, 12)==="" ) {
+        iconXTime(dateTimeHtml);
+        dateTimeHtmlEror.innerHTML +="<br>"+ "23-35 , פורמט תאריך דקה שגוי  ,שורה 2";
+       
+    }
+
+
+
+    dateTimeHtml.innerHTML += "תאריך  תעודה : " + day + "/" + month + "/" + year + "-" + hour + ":" + minute;
+    dateTimeHtml.style.right ="32px";
+
+
+    
+    var dateTimeHtml1 = document.getElementById('dateTimeHtml');
+    var icons = dateTimeHtml1.querySelectorAll('.fa-solid.fa-x');
+    if (icons.length > 0) {
+    } else {
+        iconVTime(dateTimeHtml);
+    }
 
 
 
@@ -331,7 +391,7 @@ async function supdesFlat() {
             SupplierSubnetHtmlEror.remove();
         } catch (e) { }
         messageRusltconstantValuesMain("SupplierSubnetHtml", "SupplierSubnetHtmlEror");
-        SupplierSubnetHtml.innerHTML += "תת ספק : " + numSupplierSubnetNumberFromeDocument;
+        SupplierSubnetHtml.innerHTML += numSupplierSubnetNumberFromeDocument+" :תת ספק" ;
         SupplierSubnetHtmlEror.innerHTML = "נראה שמספר התת ספק <span style='color:#ff0000'>'תואם'</span> למספק הספק הראשי, במידה והספק היה מעוניין לשלוח תחת תת ספק מסוים אז ישנה טעות בשידור , שורה 2 ,104-119";
         iconExclamationMark(SupplierSubnetHtml);
 
@@ -341,7 +401,7 @@ async function supdesFlat() {
             SupplierSubnetHtmlEror.remove();
         } catch (e) { }
         messageRusltconstantValuesMain("SupplierSubnetHtml", "SupplierSubnetHtmlEror");
-        SupplierSubnetHtml.innerHTML += "תת ספק : " + numSupplierSubnetNumberFromeDocument;
+        SupplierSubnetHtml.innerHTML +=numSupplierSubnetNumberFromeDocument+ " :תת ספק" ;
         SupplierSubnetHtmlEror.innerHTML = "נראה שמספר התת ספק <span style='color:#ff0000'>'שונה'</span> ממספר הספק הראשי, במידה והספק היה מעוניין לשלוח תחת תת ספק בדוק שאכן התת הספק הנ'ל מוקם תקין , שורה 2 ,104-119";
         iconExclamationMark(SupplierSubnetHtml);
 
@@ -533,7 +593,7 @@ async function supdesFlat() {
 
 
 
-//******************************************barcodes ***************************************/
+    //******************************************barcodes ***************************************/
 
     //DELET the table of barcodes
     const tdElementh = document.querySelectorAll('table');
@@ -541,7 +601,7 @@ async function supdesFlat() {
         table.remove();
     });
 
-   
+
 
 
     //add table+th for the table
@@ -567,9 +627,23 @@ async function supdesFlat() {
 
 
 
-
-//Loop over all lines of the certificate
+    //Loop over all lines of the certificate
     for (var i = 3; i < lines.length - 2; i++) {
+
+        try {
+            const LINE0201erorLineT = document.getElementById("LINE0201erorLine" + i);
+            LINE0201erorLineT.remove();
+        }
+        catch (s) { }
+
+        try {
+            const LINE0201erorLineA = document.getElementById("LINE0201erorLine" + i + "A");
+            LINE0201erorLineA.remove();
+        }
+        catch (s) { }
+
+
+
         //variables
         const StartOfLineLINE0201 = lines[i].substring(0, 8);
         const StartOfLineLINE0101 = lines[i].substring(0, 8);
@@ -578,50 +652,66 @@ async function supdesFlat() {
         const numPackaging = lines[i].substring(26, 41);
         const numSingul = lines[i].substring(41, 56);
 
+
+
+
         //creat tr and td to the table
         messageRusltBarcodes("LINE0201Line" + i, "LINE0201erorLine" + i);
 
-    
+
+
         document.getElementById("LINE0201Line" + i + "T").innerHTML += i + 1;
         document.getElementById("LINE0201Line" + i + "A").innerHTML = Barcodes;
         document.getElementById("LINE0201Line" + i + "M").innerHTML = numPackaging;
         document.getElementById("LINE0201Line" + i + "Y").innerHTML = numSingul;
 
-      
+
+
+
+
         if (compareStringsIgnoreCaseAndSpace(StartOfLineLINE0101, LINE0101)) {
 
-            if (surfaceNumber.trim()=== "") {
+            if (surfaceNumber.trim() === "") {
                 document.getElementById("LINE0201Line" + i + "T").innerHTML += `<i  class="fa-solid fa-x" style="color: #fa0000;font-size: 12px;"></i>`;
                 document.getElementById("LINE0201erorLine" + i).innerHTML = "50-68 ," + (i + 1) + " ערך של מספר זיהוי משטח חסר , שורה ";
             }
         }
         else {
-            if (!compareStringsIgnoreCaseAndSpace(StartOfLineLINE0201, LINE0201) && Barcodes.trim()=== "") {
-                document.getElementById("LINE0201Line" + i + "T").innerHTML += `<i  class="fa-solid fa-x" style="color: #fa0000;font-size: 12px;"></i>`;
-                document.getElementById("LINE0201erorLine" + i).innerHTML = "0-8 ," + (i + 1) + " חסר או שגוי, שורה  " + StartOfLineLINE0201 + " ערך"+"<br>";
+
+            if (!compareStringsIgnoreCaseAndSpace(StartOfLineLINE0201, LINE0201) && Barcodes.trim() === "") {
                 document.getElementById("LINE0201Line" + i + "A").innerHTML += `<i  class="fa-solid fa-x" style="color: #fa0000;font-size: 12px;"></i>`;
-                 document.getElementById("LINE0201erorLine" + i + "A").innerHTML = "8-23 ," + (i + 1) + " ברקוד חסר , שורה ";
-               
-            }
-            else if(!compareStringsIgnoreCaseAndSpace(StartOfLineLINE0201, LINE0201)){
+                document.getElementById("LINE0201erorLine" + i + "A").innerHTML = "8-23 ," + (i + 1) + " ברקוד חסר , שורה ";
+                document.getElementById("LINE0201erorLine" + i + "A").style.marginTop = "30px";
                 document.getElementById("LINE0201Line" + i + "T").innerHTML += `<i  class="fa-solid fa-x" style="color: #fa0000;font-size: 12px;"></i>`;
-                document.getElementById("LINE0201erorLine" + i).innerHTML = "0-8 ," + (i + 1) + " חסר או שגוי, שורה  " + StartOfLineLINE0201 + " ערך"+"<br>";
-            }
-             else if(Barcodes.trim()=== ""){
-                document.getElementById("LINE0201Line" + i + "T").innerHTML += `<i  class="fa-solid fa-x" style="color: #fa0000;font-size: 12px;"></i>`;
-                document.getElementById("LINE0201erorLine" + i ).innerHTML = "8-23 ," + (i + 1) + " ברקוד חסר , שורה ";
+                document.getElementById("LINE0201erorLine" + i).innerHTML = "0-8 ," + (i + 1) + " חסר או שגוי, שורה  " + StartOfLineLINE0201 + " ערך" + "<br>";
+
             }
 
-             
+            else if (!compareStringsIgnoreCaseAndSpace(StartOfLineLINE0201, LINE0201)) {
+                const LINE0201erorLineA = document.getElementById("LINE0201erorLine" + i + "A");
+                LINE0201erorLineA.remove();
+                document.getElementById("LINE0201Line" + i + "T").innerHTML += `<i  class="fa-solid fa-x" style="color: #fa0000;font-size: 12px;"></i>`;
+                document.getElementById("LINE0201erorLine" + i).innerHTML = "0-8 ," + (i + 1) + " חסר או שגוי, שורה  " + StartOfLineLINE0201 + " ערך" + "<br>";
+            }
+
+            else if (Barcodes.trim() === "") {
+                const LINE0201erorLineT = document.getElementById("LINE0201erorLine" + i);
+                LINE0201erorLineT.remove();
+
+                document.getElementById("LINE0201Line" + i + "A").innerHTML += `<i  class="fa-solid fa-x" style="color: #fa0000;font-size: 12px;"></i>`;
+                document.getElementById("LINE0201erorLine" + i + "A").innerHTML = "8-23 ," + (i + 1) + " ברקוד חסר , שורה ";
+            }
+
+
+
+
         }
 
 
-//******************************************barcodes ***************************************/
+        //******************************************barcodes ***************************************/
 
 
-        
-
-
+        colorBorder();
 
 
 
@@ -630,7 +720,7 @@ async function supdesFlat() {
 
 
 
-  
+
 
 
 
@@ -719,8 +809,27 @@ function iconExclamationMark(element) {
 
 }
 
+function iconXTime(element) {
+    return element.innerHTML = `<i  class="fa-solid fa-x" style="position:absolute;color: #fa0000;font-size: 12px;right:-20px;top:3px"></i>`;
+}
 
 
+function iconVTime(element) {
+    return element.innerHTML += `<i  class="fa-solid fa-check" style="position:absolute;color: #54f000;font-size: 12px;right:-20px;top:3px"></i>`;
+}
+
+
+function colorBorder() {
+    var messageRuslt1 = document.getElementById('messageRuslt1');
+    var icons = messageRuslt1.querySelectorAll('.fa-solid.fa-x');
+
+    if (icons.length > 0) {
+        messageRuslt1.style.border = "7px solid #fbb7b7";
+    } else {
+        messageRuslt1.style.border = "7px solid #8ad78c";
+    }
+
+}
 
 
 
