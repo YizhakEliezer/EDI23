@@ -245,7 +245,6 @@ input:checked + .toggle-slider:before {
 .upFile {
     background-color: white;
     border-radius: 4px;
-    /*/display: none;/*/
 }
 
 

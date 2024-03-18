@@ -8,13 +8,7 @@ function darkMode(){
     const dropzone = document.getElementById("drop-zone");
     const uploadiconDiv = document.getElementById("upload-iconDiv");
     const AllData = document.querySelector('.AllData');
-    var AllDataH = AllData.querySelector('h1');
-    var inputBox = document.querySelector('.inputBox');
-    var inputElements = inputBox.querySelectorAll('input');
-    const menuTypeStructure = document.getElementById("menuTypeStructure");
-    const menuTypefile = document.getElementById("menuTypefile");
-    const selectedValue = document.getElementById("selectedValue");
-    const selectedValueRetailer = document.getElementById("selectedValueRetailer");
+     var inputElements = body.querySelectorAll('input');
     const fileChek = document.getElementById("fileChek");
     var upFile = document.querySelector('.upFile');
     const titelFile = document.getElementById("titelFile");
@@ -55,23 +49,11 @@ function darkMode(){
     uploadiconDiv.style.backgroundColor = "#ffd0f1";
     uploadiconDiv.style.color = "#232020";
     AllData.style.backgroundColor = "#282828";
-    AllDataH.style.color = "white";
-    AllDataH.style.borderBottom="2px solid #ffd0f1";
+ 
     inputElements.forEach(function(input) {
         input.style.backgroundColor = "#ffebfc";
         input.style.color = "black";
     });
-    menuTypeStructure.style.backgroundColor = "#ffd0f1";
-    menuTypefile.style.backgroundColor = "#ffd0f1";
-    menuTypeStructure.style.color = "black";
-    menuTypefile.style.color = "black";
-
-
-    selectedValue.style.backgroundColor = "#282828";
-    selectedValue.style.color = "white";
-    selectedValueRetailer.style.backgroundColor = "#282828";
-    selectedValueRetailer.style.color = "white";
-
 
     upFile.style.backgroundColor = "#282828";
     titelFile.style.color = "white";
@@ -101,13 +83,7 @@ function brightMode(){
     const dropzone = document.getElementById("drop-zone");
     const uploadiconDiv = document.getElementById("upload-iconDiv");
     const AllData = document.querySelector('.AllData');
-    var AllDataH = AllData.querySelector('h1');
-    var inputBox = document.querySelector('.inputBox');
-    var inputElements = inputBox.querySelectorAll('input');
-    const menuTypeStructure = document.getElementById("menuTypeStructure");
-    const menuTypefile = document.getElementById("menuTypefile");
-    const selectedValue = document.getElementById("selectedValue");
-    const selectedValueRetailer = document.getElementById("selectedValueRetailer");
+     var inputElements = body.querySelectorAll('input');
     var upFile = document.querySelector('.upFile');
     const titelFile = document.getElementById("titelFile");
     const fileChek = document.getElementById("fileChek");
@@ -131,22 +107,11 @@ function brightMode(){
     uploadiconDiv.style.backgroundColor = " #3f4fd3";
     uploadiconDiv.style.color = "white";
     AllData.style.backgroundColor = "white";
-    AllDataH.style.color = "#4d4a4a";
-    AllDataH.style.borderBottom="2px solid #4CAF50"
+
     inputElements.forEach(function(input) {
         input.style.backgroundColor = "white";
         input.style.color = "#2d3cc7";
     });
-
-    menuTypeStructure.style.backgroundColor = "white";
-    menuTypefile.style.backgroundColor = "white";
-    menuTypeStructure.style.color = "#2d3cc7";
-    menuTypefile.style.color = "#2d3cc7";
-
-    selectedValue.style.backgroundColor = "white";
-    selectedValue.style.color = " #2d3cc7";
-    selectedValueRetailer.style.backgroundColor = "white";
-    selectedValueRetailer.style.color = " #2d3cc7";
 
     upFile.style.backgroundColor = "white";
     titelFile.style.color = "#4d4a4a";

@@ -5,9 +5,7 @@ async function supdesFlat() {
     fileContent = fileChek.value;
     //split the value to line
     const lines = fileContent.split('\n');
-    //myArray test results
-    myArrayConstantValues = [];
-    myArrayBarcodes = [];
+
 
 
 
@@ -254,6 +252,10 @@ async function supdesFlat() {
     } else {
         iconVTime(dateTimeHtml);
     }
+
+
+
+
 
 
 
@@ -810,12 +812,12 @@ function iconExclamationMark(element) {
 }
 
 function iconXTime(element) {
-    return element.innerHTML = `<i  class="fa-solid fa-x" style="position:absolute;color: #fa0000;font-size: 12px;right:-20px;top:3px"></i>`;
+    return element.innerHTML = `<i  class="fa-solid fa-x" style="position:absolute;color: #fa0000;font-size: 12px;right:-22px;top:3px"></i>`;
 }
 
 
 function iconVTime(element) {
-    return element.innerHTML += `<i  class="fa-solid fa-check" style="position:absolute;color: #54f000;font-size: 12px;right:-20px;top:3px"></i>`;
+    return element.innerHTML += `<i  class="fa-solid fa-check" style="position:absolute;color: #54f000;font-size: 12px;right:-22px;top:3px"></i>`;
 }
 
 
