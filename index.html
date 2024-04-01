@@ -11,6 +11,9 @@
     <script type="text/javascript" src="Contrast.js"></script>
     <script type="text/javascript" src="chekFileFletOrder.js"></script>
     <script type="text/javascript" src="supdesFlat.js"></script>
+    <script type="text/javascript" src="orderFlat.js"></script>
+    <script type="text/javascript" src="supdesHashavshevt.js"></script>
+    <script type="text/javascript" src="entryFlat.js"></script>
     <!--    Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -18,8 +21,8 @@
 
 <!--Activation of the test by an event when the user presses enter-->
 
-<body class="body" onkeydown="checkEnter(event)">
-
+<body class="body" >
+    <!-- onkeydown="checkEnter(event)" -->
 
     <label class="toggle-container">
         <input type="checkbox" onclick="toggleFunction()">
@@ -72,7 +75,7 @@
 
 
 
-    
+
     <!--up file input+drop-->
     <div class="upFile">
         <h1 id="titelFile">קבצים</h1>
@@ -109,9 +112,10 @@
       position: relative;
       top: 49%;
       /*right: 250px;*/
-      font-size: 15px;
-      color: #ff0000;
-    display: none;"></div>
+      font-size: 14px;
+      color: #f74141;
+    display: none;"
+    ></div>
             </div>
             <!--input to select a file-->
             <input type="file" id="file-input" onchange="handleFileInput(event)" />
@@ -120,48 +124,88 @@
     </div>
 
 
-     <!--input the file-->
+    <!--input the file-->
     <textarea id="fileChek"></textarea>
-       <!--Row and Column-->
+    <!--Row and Column-->
     <div id="RowColumn"></div>
+    <!-- <button onclick="exportText()" id="buttonEror">ייצא טקסט לקובץ</button> -->
 
 
+    <i class="fa-solid fa-file-arrow-down"   onclick="exportText()" id="saveFile"></i>
 
-     <!--eror type mass-->
-    <div id="erorMss">
+
+    <!--eror type mass-->
+    <!-- <div id="erorMss">
         <p id="erorP"></p>
-        <select id="erorMssSelect" name="erorMssSelect">
+         <select id="erorMssSelectStructure" name="erorMssSelectStructure">
+            <option value="">מבנה המסר</option>
+            <option value="hashavshevt">חשבשבת</option>
+            <option value="Flat">Flat file</option>
+        </select> -->
+
+        <!-- <select id="erorMssSelect" name="erorMssSelect">
             <option value="">סוג מסר</option>
             <option value="supdes">משלוח</option>
             <option value="order">הזמנה</option>
             <option value="entry">כניסה</option>
             <option value="return">החזרה</option>
-        </select>
+        </select> -->
+
         <!-- <button id="buttonEror" onclick="document.getElementById('erorMss').style.display= 'none'">סגור</button> -->
-    </div>
+    <!-- </div> --> 
+
+
+
+</div>
+    
 
 
     <script>
 
 
+function exportText() {
+    const text = document.getElementById("fileChek").value;
+    const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = document.getElementById('file-name').innerHTML+"New.txt";
+    a.click();
+}
 
 
 
 
 
 
-        const textarea = document.getElementById("fileChek");
-        const output = document.getElementById("RowColumn");
 
-        textarea.addEventListener("mousemove", function (event) {
-            const cursorPosition = textarea.selectionStart;
-            const text = textarea.value;
-            const row = text.substr(0, cursorPosition).split("\n").length;
-            const col = cursorPosition - text.lastIndexOf("\n", cursorPosition - 1);
 
-            output.textContent = `Row: ${row}, Column: ${col}`;
-        });
 
+
+
+const textarea = document.getElementById("fileChek");
+const output = document.getElementById("RowColumn");
+
+textarea.addEventListener("mouseover", startUpdating);
+textarea.addEventListener("mouseout", stopUpdating);
+
+let intervalId;
+
+function startUpdating() {
+    intervalId = setInterval(updateCursorPosition, 0); 
+}
+
+function stopUpdating() {
+    clearInterval(intervalId);
+}
+
+function updateCursorPosition() {
+    const cursorPosition = textarea.selectionStart;
+    const text = textarea.value;
+    const row = text.substr(0, cursorPosition).split("\n").length;
+    const col = cursorPosition - text.lastIndexOf("\n", cursorPosition - 1);
+
+    output.textContent = `Row: ${row}, Column: ${col}`;
+}
 
 
 
@@ -187,44 +231,34 @@
 
 
 
-        function checkEnter(event) {
-            const AllData = document.getElementById('messageRuslt1');
-            if (AllData.style.display === "block") {
-                if (event.key === 'Enter') {
-                    if (fileChek.value.includes("ENV")) {
-                        if (fileChek.value.includes("SUPDES")) {
-                            try {
-                                document.getElementById("buttonEror").click();
-                            } catch (e) { }
-                            supdesFlat();
-                        }
-                        else {
-                            const erorMss = document.getElementById('erorMss');
-                            erorMss.style.display = "block";
-                            const erorMssP = document.getElementById('erorP');
-                            erorMssP.innerHTML = "נראה שהתעודה שנבחרה ללא סוג מסר רצוי לבדיקה , או שהערך של 'סוג תעודה' במסר שגוי";
-                            erorMssP.innerHTML += "<br>" + " אנא בחר את סוג התעודה לבדיקה ולאחר מכן לחץ אנטר";
-
-                            var TypeSelect = document.getElementById("erorMssSelect").value;
-                            if (TypeSelect === "supdes") {
-                                supdesFlat();
-                                document.getElementById('erorMss').style.display = 'none';
-                            }
-
-                        }
-
-                    }
-                    else {
-                        chekFileHashavshevtSupdes();
-                    }
-
-                }
-
-            }
-        }
 
 
 
+
+
+
+//         function setTextDirectionForAllElements() {
+//     // Regular expression to check for Hebrew characters
+//     const hebrewRegex = /[\u0590-\u05FF\u0600-\u06FF]/;
+
+//     // Get all elements that contain text
+//     const elements = document.querySelectorAll('*:not(script):not(style)');
+    
+//     elements.forEach(element => {
+//         if (element.childNodes.length === 1 && element.childNodes[0].nodeType === 3) { // Check if the element contains text
+//             const text = element.textContent.trim();
+            
+//             if (hebrewRegex.test(text)) {
+//                 element.setAttribute('dir', 'rtl'); // Right-to-left for Hebrew
+//             } else {
+//                 element.setAttribute('dir', 'ltr'); // Left-to-right for English
+//             }
+//         }
+//     });
+// }
+
+// // Run the function when the page is loaded
+// window.addEventListener('DOMContentLoaded', setTextDirectionForAllElements);
 
 
     </script>

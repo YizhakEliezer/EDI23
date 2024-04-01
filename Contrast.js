@@ -36,7 +36,7 @@ function darkMode(){
     }
 
 
-
+    filename.style.color = "rgb(255 126 126)";
     RowColumn.style.color = "white";
       messageRuslt1.style.color = "#474545";
     body.style.backgroundColor = "#232020";
@@ -66,7 +66,7 @@ function darkMode(){
     messageRuslt1.style.backgroundColor = "#282828";
     messageRuslt1.style.color = "white";
     reulstTest.style.color = "white";
-    filename.style.color = "#fc6a6a";
+    // filename.style.color = "#fc6a6a";
     moreFile.style.color = "#fc6a6a";
 
    
@@ -94,7 +94,7 @@ function brightMode(){
     const RowColumn = document.getElementById("RowColumn");
 
 
-
+    filename.style.color = "#f74141";
     RowColumn.style.color = "#3f3d3d";
     messageRuslt1.style.color = "#474545";
     body.style.backgroundColor = "#f0f0f3";
@@ -124,7 +124,7 @@ function brightMode(){
 
     messageRuslt1.style.backgroundColor = "#ffffff";
     reulstTest.style.color = "#4d4a4a";
-    filename.style.color = "#ff0000";
+ 
     moreFile.style.color = "#ff0000";
 
 }
